@@ -2,7 +2,6 @@
 
 DOMAIN = "plexamp_speed_dial"
 DEFAULT_NAME = "Plexamp Speed Dial"
-DEFAULT_SCAN_INTERVAL_SECONDS = 60
 
 CONF_BASE_URL = "base_url"
 

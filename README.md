@@ -21,6 +21,7 @@ Lists your speed-dial favorites by **label** (with player/speaker/volume **descr
 
 ## What you get
 
+- Favorites are read when you add the integration and again only when you reload it (Devices & services → Plexamp Speed Dial → Reload). Add or edit a speed dial in the Speed Dial app, then reload to pick up the change.
 - One **button** entity per speed dial (`button.plexamp_speed_dial_<label>`)
 - Entity name = favorite **label**
 - Entity extra attributes include `description` (player · speakers/AVR · volumes) and `favorite_id`
