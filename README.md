@@ -21,7 +21,7 @@ Lists your speed-dial favorites by **label** (with player/speaker/volume **descr
 
 ## What you get
 
-- Favorites are read when you add the integration and again only when you reload it (Devices & services → Plexamp Speed Dial → Reload). Add or edit a speed dial in the Speed Dial app, then reload to pick up the change.
+- Favorites are loaded when you add the integration and refreshed every 5 minutes. Reload the integration if you want the list updated immediately.
 - One **button** entity per speed dial (`button.plexamp_speed_dial_<label>`)
 - Entity name = favorite **label**
 - Entity extra attributes include `description` (player · speakers/AVR · volumes) and `favorite_id`
@@ -33,7 +33,7 @@ Lists your speed-dial favorites by **label** (with player/speaker/volume **descr
 2. Open the action combobox and pick a speed dial. Each row shows the favorite **label** and its **description** (player, speakers or AVR, and volumes).
 3. Home Assistant stores that favorite's id as `favorite_id`. When the automation or script runs, the integration calls `POST /api/v1/speed-dial/{id}/play` with the stored id.
 
-Reload the integration after you add or edit speed dials so the combobox matches the app. A saved action keeps working from the stored id if you later rename that speed dial; pick it again in the combobox if you want the row text to match the new name.
+New or edited speed dials show up in the combobox within 5 minutes. Reload the integration if you want them immediately. A saved action keeps working from the stored id if you later rename that speed dial; pick it again in the combobox if you want the row text to match the new name.
 
 ### Example service call
 

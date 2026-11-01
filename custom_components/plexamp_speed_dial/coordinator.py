@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import timedelta
 import logging
 from typing import Any
 
@@ -9,20 +10,20 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .api import SpeedDialApiClient, SpeedDialApiError
-from .const import DOMAIN
+from .const import DEFAULT_SCAN_INTERVAL_SECONDS, DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
 
 class SpeedDialCoordinator(DataUpdateCoordinator[list[dict[str, Any]]]):
-    """Fetch speed-dial favorites when the integration is set up or reloaded."""
+    """Fetch speed-dial favorites on setup and every five minutes."""
 
     def __init__(self, hass: HomeAssistant, client: SpeedDialApiClient) -> None:
         super().__init__(
             hass,
             _LOGGER,
             name=DOMAIN,
-            update_interval=None,
+            update_interval=timedelta(seconds=DEFAULT_SCAN_INTERVAL_SECONDS),
         )
         self.client = client
 
