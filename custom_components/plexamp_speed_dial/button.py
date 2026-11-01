@@ -15,7 +15,7 @@ from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .api import SpeedDialApiError
 from .const import ATTR_DESCRIPTION, ATTR_FAVORITE_ID, ATTR_LABEL, DOMAIN
-from .coordinator import SpeedDialCoordinator
+from .coordinator import SpeedDialCoordinator, speed_dial_display_name
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -69,8 +69,6 @@ class SpeedDialFavoriteButton(CoordinatorEntity[SpeedDialCoordinator], ButtonEnt
         super().__init__(coordinator)
         self._entry = entry
         self._favorite_id = int(favorite["id"])
-        label = str(favorite.get("label") or f"Speed dial {self._favorite_id}")
-        self._attr_name = label
         self._attr_unique_id = f"{entry.entry_id}_favorite_{self._favorite_id}"
         self._attr_device_info = DeviceInfo(
             identifiers={(DOMAIN, entry.entry_id)},
@@ -78,6 +76,19 @@ class SpeedDialFavoriteButton(CoordinatorEntity[SpeedDialCoordinator], ButtonEnt
             manufacturer="Plexamp Speed Dial",
             model="Speed Dial",
         )
+
+    @property
+    def name(self) -> str:
+        favorite = self.favorite
+        if favorite is None:
+            return f"Speed dial {self._favorite_id}"
+        return speed_dial_display_name(favorite)
+
+    @property
+    def suggested_object_id(self) -> str:
+        favorite = self.favorite or {}
+        label = str(favorite.get("label") or "").strip()
+        return label or f"speed_dial_{self._favorite_id}"
 
     @property
     def favorite(self) -> dict[str, Any] | None:

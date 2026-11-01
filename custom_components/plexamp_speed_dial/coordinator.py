@@ -15,6 +15,17 @@ from .const import DEFAULT_SCAN_INTERVAL_SECONDS, DOMAIN
 _LOGGER = logging.getLogger(__name__)
 
 
+def speed_dial_display_name(favorite: dict[str, Any]) -> str:
+    """Favorite label plus player, speakers, and volumes."""
+    label = str(favorite.get("label") or "").strip()
+    description = str(favorite.get("description") or "").strip()
+    if not label:
+        label = f"Speed dial {favorite.get('id')}"
+    if description:
+        return f"{label} — {description}"
+    return label
+
+
 class SpeedDialCoordinator(DataUpdateCoordinator[list[dict[str, Any]]]):
     """Fetch speed-dial favorites on setup and every five minutes."""
 

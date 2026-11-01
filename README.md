@@ -23,7 +23,7 @@ Lists your speed-dial favorites by **label** (with player/speaker/volume **descr
 
 - Favorites are loaded when you add the integration and refreshed every 5 minutes. Reload the integration if you want the list updated immediately.
 - One **button** entity per speed dial (`button.plexamp_speed_dial_<label>`)
-- Entity name = favorite **label**
+- Entity name = favorite **label** plus its description (player, speakers or AVR, and volumes), for example `Bruno Mars (radio) — Living Room · Kitchen (20%)`
 - Entity extra attributes include `description` (player · speakers/AVR · volumes) and `favorite_id`
 - Service `plexamp_speed_dial.play` with optional `label` or `favorite_id`
 

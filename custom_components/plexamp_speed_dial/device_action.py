@@ -14,7 +14,8 @@ from homeassistant.helpers import config_validation as cv, device_registry as dr
 from homeassistant.helpers.typing import ConfigType
 
 from .api import SpeedDialApiError
-from .const import ATTR_DESCRIPTION, ATTR_FAVORITE_ID, ATTR_LABEL, DOMAIN
+from .const import ATTR_FAVORITE_ID, DOMAIN
+from .coordinator import speed_dial_display_name
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -38,17 +39,6 @@ def _entry_id_for_device(hass: HomeAssistant, device_id: str) -> str | None:
     return None
 
 
-def _choice_label(favorite: dict[str, Any]) -> str:
-    """Label plus play target, which is the info shown for a speed dial."""
-    label = str(favorite.get(ATTR_LABEL) or "").strip()
-    description = str(favorite.get(ATTR_DESCRIPTION) or "").strip()
-    if label and description:
-        return f"{label} — {description}"
-    if label or description:
-        return label or description
-    return f"Speed dial {favorite.get('id')}"
-
-
 def _actions_for_favorites(device_id: str, favorites: list[dict[str, Any]]) -> list[dict[str, Any]]:
     prepared: list[tuple[int, str]] = []
     for row in favorites:
@@ -58,7 +48,7 @@ def _actions_for_favorites(device_id: str, favorites: list[dict[str, Any]]) -> l
             continue
         if favorite_id < 1:
             continue
-        prepared.append((favorite_id, _choice_label(row)))
+        prepared.append((favorite_id, speed_dial_display_name(row)))
 
     counts: dict[str, int] = {}
     for _, text in prepared:
