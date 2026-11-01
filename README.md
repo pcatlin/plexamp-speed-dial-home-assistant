@@ -27,6 +27,14 @@ Lists your speed-dial favorites by **label** (with player/speaker/volume **descr
 - Entity extra attributes include `description` (player · speakers/AVR · volumes) and `favorite_id`
 - Service `plexamp_speed_dial.play` with optional `label` or `favorite_id`
 
+### Automation or script
+
+1. Add an action and choose the **Plexamp Speed Dial** device.
+2. Open the action combobox and pick a speed dial. Each row shows the favorite **label** and its **description** (player, speakers or AVR, and volumes).
+3. Home Assistant stores that favorite's id as `favorite_id`. When the automation or script runs, the integration calls `POST /api/v1/speed-dial/{id}/play` with the stored id.
+
+Reload the integration after you add or edit speed dials so the combobox matches the app. A saved action keeps working from the stored id if you later rename that speed dial; pick it again in the combobox if you want the row text to match the new name.
+
 ### Example service call
 
 ```yaml
