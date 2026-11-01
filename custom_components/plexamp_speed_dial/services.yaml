@@ -1,0 +1,18 @@
+play:
+  name: Play speed dial
+  description: Start a Plexamp Speed Dial favorite by label or id.
+  fields:
+    label:
+      name: Label
+      description: Speed dial label (case-insensitive). Prefer this for automations.
+      example: Evening jazz
+      selector:
+        text:
+    favorite_id:
+      name: Favorite ID
+      description: Numeric speed dial id from the Speed Dial app.
+      example: 7
+      selector:
+        number:
+          min: 1
+          mode: box

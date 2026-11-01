@@ -1,0 +1,26 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Plexamp Speed Dial",
+        "description": "Enter the base URL of your Speed Dial instance (the same host you open in a browser).",
+        "data": {
+          "base_url": "Base URL",
+          "name": "Name"
+        },
+        "data_description": {
+          "base_url": "Example: http://192.168.1.50:3322"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not connect to the Speed Dial API. Check the URL and that the app is running.",
+      "invalid_url": "Enter a valid URL such as http://192.168.1.50:3322",
+      "auth": "Speed Dial rejected the request (Plex may not be linked).",
+      "unknown": "Unexpected error. Check Home Assistant logs."
+    },
+    "abort": {
+      "already_configured": "This Speed Dial URL is already configured."
+    }
+  }
+}

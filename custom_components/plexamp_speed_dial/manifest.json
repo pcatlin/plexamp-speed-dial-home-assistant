@@ -1,0 +1,12 @@
+{
+  "domain": "plexamp_speed_dial",
+  "name": "Plexamp Speed Dial",
+  "codeowners": ["@pcatlin"],
+  "config_flow": true,
+  "documentation": "https://github.com/pcatlin/plexamp-speed-dial-home-assistant",
+  "integration_type": "hub",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/pcatlin/plexamp-speed-dial-home-assistant/issues",
+  "requirements": ["aiohttp"],
+  "version": "0.1.0"
+}
